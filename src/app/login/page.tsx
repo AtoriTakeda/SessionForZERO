@@ -6,6 +6,10 @@ export default function LoginPage() {
   const handleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
+      options: {
+        redirectTo:
+          "https://session-for-zero-git-work-atoritakedas-projects.vercel.app/login/callback",
+      },
     });
 
     if (error) console.error("ログイン失敗:", error);
