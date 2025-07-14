@@ -9,8 +9,8 @@ export default function LoginPage() {
       provider: "google",
       options: {
         redirectTo:
-          // 本番用では本番用のURLに変更する。その際本番用のSupabaseのプロジェクトでもSite URLとRedirect URLsを設定しておく
-          "https://session-for-zero-git-work-atoritakedas-projects.vercel.app/login/callback",
+          // 本番用
+          "https://session-for-zero-git-main-atoritakedas-projects.vercel.app/login/callback",
         //"http://localhost:3000/login/callback",
       },
     });
