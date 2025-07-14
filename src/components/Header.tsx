@@ -5,7 +5,7 @@ import { AvatarMenu } from "@/components/AvatarMenu";
 
 export default function Header() {
   return (
-    <header className="w-full bg-black text-white px-6 py-4 flex items-center justify-between">
+    <header className="fixed top-0 left-0 w-full bg-black text-white px-6 py-4 flex items-center justify-between">
       <div className="flex items-end space-x-6">
         {/* 左側：ロゴ */}
         <Link href="/" className="flex flex-col leading-none mr-2">

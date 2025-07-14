@@ -1,7 +1,7 @@
 "use client";
 
 import { Song, RawPerformer, GroupedPerformer } from "@/lib/types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabaseClient } from "@/lib/supabase/browser";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -41,6 +41,7 @@ export default function SongListComponentWrapper({
 function SongListComponent({ user, onRefresh }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const lastScrollY = useRef(0);
   const [songs, setSongs] = useState<Song[]>([]);
   const [songInfo, setSongInfo] = useState<Song | null>(null);
   const [allPerformers, setAllPerformers] = useState<RawPerformer[]>([]);
@@ -49,8 +50,15 @@ function SongListComponent({ user, onRefresh }: Props) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const onScroll = () => {
+      lastScrollY.current = window.scrollY;
+    };
+
     fetchSongList();
     fetchPerformer();
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -60,6 +68,13 @@ function SongListComponent({ user, onRefresh }: Props) {
     }
     setLoading(false);
   }, [searchParams, router]);
+
+  const handleBackgroundClick = () => {
+    const now = window.scrollY;
+    if (Math.abs(now - lastScrollY.current) < 2) {
+      setIsOpen(false);
+    }
+  };
 
   const fetchSongList = async () => {
     const { data, error } = await supabaseClient
@@ -166,14 +181,14 @@ function SongListComponent({ user, onRefresh }: Props) {
       )}
       <h1 className="text-2xl font-bold mb-6 text-center">エントリーシート</h1>
       <div className="flex flex-col items-center mt-8">
-        <table className="w-auto border-collapse">
+        <table className="w-full border-collapse text-sm sm:text-base">
           <thead className="bg-lime-300">
             <tr>
-              <td className="border px-4 py-2 text-left font-bold">
+              <th className="border px-2 py-1 text-left font-bold">
                 アーティスト名
-              </td>
-              <td className="border px-4 py-2 text-left font-bold">曲名</td>
-              <td className="border px-4 py-2 text-left font-bold">詳細情報</td>
+              </th>
+              <th className="border px-2 py-1 text-left font-bold">曲名</th>
+              <th className="border px-2 py-1 text-left font-bold">詳細情報</th>
             </tr>
           </thead>
           <tbody>
@@ -182,18 +197,16 @@ function SongListComponent({ user, onRefresh }: Props) {
                 key={song.id}
                 className={index % 2 ? "bg-white" : "bg-lime-50"}
               >
-                <td className="border px-4 py-2 break-words max-w-[300px]">
+                <td className="border px-2 py-1 break-words max-w-[200px] sm:max-w-[300px]">
                   {song.artist}
                 </td>
-                <td className="border px-4 py-2 break-words max-w-[300px]">
+                <td className="border px-2 py-1 break-words max-w-[200px] sm:max-w-[300px]">
                   {song.title}
                 </td>
-                <td className="border px-4 py-2 w-[100px] whitespace-nowrap">
+                <td className="border px-2 py-1 whitespace-nowrap">
                   <button
-                    onClick={() => {
-                      handleShowDetails(song);
-                    }}
-                    className="px-3 py-1 bg-gray-700 text-white rounded hover:bg-gray-800 transition"
+                    onClick={() => handleShowDetails(song)}
+                    className="px-2 py-1 bg-gray-700 text-white rounded text-xs sm:text-sm hover:bg-gray-800"
                   >
                     確認
                   </button>
@@ -218,7 +231,7 @@ function SongListComponent({ user, onRefresh }: Props) {
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            onClick={() => setIsOpen(false)}
+            onClick={handleBackgroundClick}
           >
             <motion.div
               className="bg-white p-6 rounded-xl shadow-lg w-full max-w-3xl overflow-y-auto max-h-[90vh] relative"
