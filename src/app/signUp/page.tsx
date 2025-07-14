@@ -1,7 +1,18 @@
-export default function SignUpPage() {
-  return (
-    <div>
-      <h1>ここはではユーザーの情報を登録します</h1>
-    </div>
-  );
+import {
+  checkAuthenticatedUser,
+  checkUserRegistered,
+} from "@/lib/supabase/checkUserInfo";
+import { redirect } from "next/navigation";
+import SignUpComponent from "./signUp";
+
+export default async function SignUpPage() {
+  const { user } = await checkAuthenticatedUser();
+
+  if (!user) {
+    redirect("/redirect");
+  }
+
+  const { isRegistered } = await checkUserRegistered(user.id);
+  if (isRegistered) redirect("/");
+  return <SignUpComponent user={user} />;
 }

@@ -3,9 +3,9 @@ import {
   checkUserRegistered,
 } from "@/lib/supabase/checkUserInfo";
 import { redirect } from "next/navigation";
-import SongListComponentWrapper from "./songList";
+import ConfirmComponent from "../confirm";
 
-export default async function SongListPage() {
+export default async function ConfirmPage() {
   const { user } = await checkAuthenticatedUser();
 
   if (!user) {
@@ -15,5 +15,7 @@ export default async function SongListPage() {
   const { isRegistered } = await checkUserRegistered(user.id);
   if (!isRegistered) redirect("/redirect");
 
-  return <SongListComponentWrapper user={user} />;
+  return (
+    <ConfirmComponent user={user} rpcName="update_entrysheet_with_member" />
+  );
 }

@@ -1,4 +1,12 @@
-import Link from "next/link";
+import "@/app/globals.css";
+import type { Metadata } from "next";
+import Header from "@/components/Header";
+import { Toaster } from "react-hot-toast";
+
+export const metadata: Metadata = {
+  title: "セッションアプリ",
+  description: "セッションに関わるあらゆることがこのアプリ一つでで",
+};
 
 export default function RootLayout({
   children,
@@ -7,16 +15,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body>
-        <header style={{ backgroundColor: "#f0f0f0", padding: "1rem" }}>
-          <nav style={{ display: "flex", gap: "1rem" }}>
-            <Link href="/">トップページ</Link>
-            <Link href="/songList">エントリーシート</Link>
-            <Link href="/member">参加者一覧</Link>
-            <Link href={`/myPage/1`}>マイページ</Link>
-          </nav>
-        </header>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-screen bg-white text-black">
+        <Header />
         <main>{children}</main>
+        <Toaster position="top-center" />
       </body>
     </html>
   );

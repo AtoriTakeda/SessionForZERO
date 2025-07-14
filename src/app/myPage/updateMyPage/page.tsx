@@ -3,9 +3,9 @@ import {
   checkUserRegistered,
 } from "@/lib/supabase/checkUserInfo";
 import { redirect } from "next/navigation";
-import SongListComponentWrapper from "./songList";
+import UpdateMyPageComponent from "./updateMyPage";
 
-export default async function SongListPage() {
+export default async function UpdateMyPage() {
   const { user } = await checkAuthenticatedUser();
 
   if (!user) {
@@ -15,5 +15,5 @@ export default async function SongListPage() {
   const { isRegistered } = await checkUserRegistered(user.id);
   if (!isRegistered) redirect("/redirect");
 
-  return <SongListComponentWrapper user={user} />;
+  return <UpdateMyPageComponent user={user} />;
 }
