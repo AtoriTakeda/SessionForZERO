@@ -10,7 +10,7 @@ export default function RedirectPage() {
   useEffect(() => {
     toast.error("サインインをしていないとアクセスできません。");
     router.push("/login");
-  }, []);
+  }, [router]);
 
   return null;
 }

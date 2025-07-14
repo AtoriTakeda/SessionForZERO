@@ -114,7 +114,7 @@ export const EntryForm = ({ user, defaultValues, onSubmit }: Props) => {
     };
 
     fetchProfiles();
-  }, []);
+  }, [defaultValues, reset, router, storeData, user.id]);
 
   return (
     <form

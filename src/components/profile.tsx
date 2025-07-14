@@ -34,7 +34,7 @@ export const ProfileForm = ({
 
   useEffect(() => {
     trigger(["startTime", "endTime"]);
-  }, [startTime, endTime]);
+  }, [startTime, endTime, trigger]);
 
   return (
     <div>

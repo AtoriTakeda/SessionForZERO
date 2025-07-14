@@ -1,13 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useUser } from "@/lib/supabase/useUser";
-import Image from "next/image";
 import { AvatarMenu } from "@/components/AvatarMenu";
 
 export default function Header() {
-  const { user } = useUser();
-
   return (
     <header className="w-full bg-black text-white px-6 py-4 flex items-center justify-between">
       <div className="flex items-end space-x-6">

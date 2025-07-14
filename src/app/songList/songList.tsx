@@ -57,15 +57,9 @@ function SongListComponent({ user, onRefresh }: Props) {
     if (searchParams.get("refresh") === "1") {
       setLoading(true);
       router.refresh();
-
-      return () => clearTimeout(timeout);
     }
-  }, [searchParams, router]);
-
-  const timeout = setTimeout(() => {
-    router.refresh();
     setLoading(false);
-  }, 1000);
+  }, [searchParams, router]);
 
   const fetchSongList = async () => {
     const { data, error } = await supabaseClient
@@ -162,8 +156,7 @@ function SongListComponent({ user, onRefresh }: Props) {
     onRefresh();
     setLoading(true);
     router.refresh();
-
-    return () => clearTimeout(timeout);
+    setLoading(false);
   };
 
   return (

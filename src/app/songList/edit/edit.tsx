@@ -50,7 +50,7 @@ export default function EditComponent({
     };
 
     fetchEntrysheet();
-  }, []);
+  }, [user.id]);
 
   const onSubmit = async (data: FormData) => {
     const memberIds = data.entries.map((entry) => entry.member);

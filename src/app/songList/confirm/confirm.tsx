@@ -22,7 +22,7 @@ export default function ConfirmComponent({
       toast.error("データが見つかりませんでした。");
       router.replace("/songList/entry");
     }
-  }, [data]);
+  }, [data, router]);
 
   if (!data) return null;
 

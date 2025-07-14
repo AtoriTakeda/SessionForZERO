@@ -39,7 +39,7 @@ export default function UpdateMyPageComponent({
     };
 
     fetchProfile();
-  }, []);
+  }, [user.id]);
 
   const onSubmit = async (data: FormData) => {
     if (!user.id) return;
