@@ -21,8 +21,10 @@ export default function RootLayout({
       <head></head>
       <body className="min-h-screen bg-white text-black">
         <Header />
-        <main>{children}</main>
-        <Toaster position="top-center" />
+        <div className="pt-24">
+          <main>{children}</main>
+          <Toaster position="top-center" />
+        </div>
       </body>
     </html>
   );

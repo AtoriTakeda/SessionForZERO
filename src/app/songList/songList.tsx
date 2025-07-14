@@ -1,7 +1,7 @@
 "use client";
 
 import { Song, RawPerformer, GroupedPerformer } from "@/lib/types";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { supabaseClient } from "@/lib/supabase/browser";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -41,7 +41,6 @@ export default function SongListComponentWrapper({
 function SongListComponent({ user, onRefresh }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const lastScrollY = useRef(0);
   const [songs, setSongs] = useState<Song[]>([]);
   const [songInfo, setSongInfo] = useState<Song | null>(null);
   const [allPerformers, setAllPerformers] = useState<RawPerformer[]>([]);
@@ -50,15 +49,8 @@ function SongListComponent({ user, onRefresh }: Props) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      lastScrollY.current = window.scrollY;
-    };
-
     fetchSongList();
     fetchPerformer();
-
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -68,13 +60,6 @@ function SongListComponent({ user, onRefresh }: Props) {
     }
     setLoading(false);
   }, [searchParams, router]);
-
-  const handleBackgroundClick = () => {
-    const now = window.scrollY;
-    if (Math.abs(now - lastScrollY.current) < 2) {
-      setIsOpen(false);
-    }
-  };
 
   const fetchSongList = async () => {
     const { data, error } = await supabaseClient
@@ -180,7 +165,7 @@ function SongListComponent({ user, onRefresh }: Props) {
         <div className="text-center py-4 text-gray-600">反映中です...</div>
       )}
       <h1 className="text-2xl font-bold mb-6 text-center">エントリーシート</h1>
-      <div className="flex flex-col items-center mt-8">
+      <div className="flex flex-col px-4 items-center mt-8">
         <table className="w-full border-collapse text-sm sm:text-base">
           <thead className="bg-lime-300">
             <tr>
@@ -188,7 +173,9 @@ function SongListComponent({ user, onRefresh }: Props) {
                 アーティスト名
               </th>
               <th className="border px-2 py-1 text-left font-bold">曲名</th>
-              <th className="border px-2 py-1 text-left font-bold">詳細情報</th>
+              <th className="border px-2 py-1 w-[90px] whitespace-nowrap text-center font-bold">
+                詳細情報
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -203,7 +190,7 @@ function SongListComponent({ user, onRefresh }: Props) {
                 <td className="border px-2 py-1 break-words max-w-[200px] sm:max-w-[300px]">
                   {song.title}
                 </td>
-                <td className="border px-2 py-1 whitespace-nowrap">
+                <td className="border px-2 py-1 whitespace-nowrap text-center">
                   <button
                     onClick={() => handleShowDetails(song)}
                     className="px-2 py-1 bg-gray-700 text-white rounded text-xs sm:text-sm hover:bg-gray-800"
@@ -231,7 +218,8 @@ function SongListComponent({ user, onRefresh }: Props) {
             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            onClick={handleBackgroundClick}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
           >
             <motion.div
               className="bg-white p-6 rounded-xl shadow-lg w-full max-w-3xl overflow-y-auto max-h-[90vh] relative"
@@ -281,7 +269,7 @@ function SongListComponent({ user, onRefresh }: Props) {
                 ))}
               </div>
               {songInfo?.planner_id === user.id && (
-                <div className="flex justify-center gap-4 mt-i">
+                <div className="flex justify-center gap-4 mt-8">
                   <button
                     onClick={() => router.push("/songList/edit")}
                     className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"

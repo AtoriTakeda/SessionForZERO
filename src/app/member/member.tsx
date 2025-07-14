@@ -26,7 +26,7 @@ export default function MemberComponent() {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-6 text-center">参加者一覧</h1>
-      <div className="flex justify-center mt-8">
+      <div className="flex px-4 justify-center mt-8">
         <table className="w-full border-[1.5px] border-black border-collapse text-sm sm:text-base">
           <thead className="bg-yellow-300">
             <tr>
@@ -36,7 +36,7 @@ export default function MemberComponent() {
               <th className="border-[1.5px] border-black px-2 py-1 text-left">
                 読み
               </th>
-              <th className="border-[1.5px] border-black px-2 py-1 text-center">
+              <th className="border-[1.5px] border-black px-2 py-1 w-[180px] whitespace-nowrap text-center">
                 参加できる時間帯
               </th>
             </tr>
