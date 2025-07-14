@@ -221,20 +221,20 @@ function SongListComponent({ user, onRefresh }: Props) {
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
           >
-            <button
-              onClick={() => setIsOpen(false)}
-              className="fixed top-4 right-4 bg-red-600 text-white rounded-full w-10 h-10 text-lg z-[9999]"
-            >
-              ×
-            </button>
             <motion.div
-              className="bg-white p-6 rounded-xl shadow-lg w-auto max-w-[95vw] overflow-y-auto max-h-[90vh] relative"
+              className="bg-white p-6 rounded-xl shadow-lg w-full max-w-3xl overflow-y-auto max-h-[90vh] relative"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.4 }}
               onClick={(e) => e.stopPropagation()}
             >
+              <button
+                onClick={() => setIsOpen(false)}
+                className="absolute -top-1 -right-1 bg-red-600 text-white rounded-full w-10 h-10 text-lg shadow-lg"
+              >
+                ×
+              </button>
               <h2 className="text-xl font-semibold mb-4">詳細情報</h2>
               <p className="mb-4">アーティスト名:{songInfo?.artist}</p>
               <p className="mb-4">曲名:{songInfo?.title}</p>
