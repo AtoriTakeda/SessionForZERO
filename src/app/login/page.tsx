@@ -10,7 +10,8 @@ export default function LoginPage() {
       options: {
         redirectTo:
           // 本番用
-          "https://session-for-zero-git-main-atoritakedas-projects.vercel.app/login/callback",
+          "https://www.sessionforzero.com/login/callback",
+        //"https://session-for-zero-git-main-atoritakedas-projects.vercel.app/login/callback",
         //"http://localhost:3000/login/callback",
       },
     });
