@@ -371,6 +371,9 @@ export const TimetableFrameForm = ({ timetablePath }: Prop) => {
               このままタイムテーブル設定に進むと、登録したタイムテーブルのデータが消去されます。よろしいですか？
             </p>
             <DialogFooter className="flex justify-end gap-2 mt-4">
+              <Button variant="outline" onClick={() => setOpen(false)}>
+                キャンセル
+              </Button>
               <Button
                 className="bg-blue-600 text-white px-5"
                 onClick={() => {
@@ -379,9 +382,6 @@ export const TimetableFrameForm = ({ timetablePath }: Prop) => {
                 }}
               >
                 OK
-              </Button>
-              <Button variant="outline" onClick={() => setOpen(false)}>
-                キャンセル
               </Button>
             </DialogFooter>
           </DialogContent>

@@ -134,19 +134,19 @@ export default function Header({ userId }: { userId: string | undefined }) {
                 <div className="text-xs text-gray-400 -mt-1">Timetable</div>
               </Link>
             )}
-          </div>
-          {isAdmin && (
-            <div className="mt-auto">
+            {isAdmin && (
               <Link
                 href="/admin"
                 className="text-center hover:text:gray-300"
                 onClick={() => setIsOpen(false)}
               >
-                <div className="text-sm font-semibold">管理者ページ</div>
-                <div className="text-xs text-gray-400 -mt-1">Administrator</div>
+                <div className="text-blue-500 text-sm font-semibold">
+                  管理者ページ
+                </div>
+                <div className="text-xs text-blue-300 -mt-1">Administrator</div>
               </Link>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
 
@@ -196,21 +196,24 @@ function PaymentStatus({
 }) {
   if (status === "unpaid") {
     return (
-      <Button className="bg-red-500 hover:bg-red-600" onClick={onPayClick}>
+      <Button
+        className="text-xs bg-red-500 hover:bg-red-600"
+        onClick={onPayClick}
+      >
         スタジオ代請求中
       </Button>
     );
   }
   if (status === "awaiting") {
     return (
-      <div className="inline-block px-4 py-2 bg-green-500 text-white font-medium rounded hover">
+      <div className="inline-block px-4 py-2 bg-green-500 text-white text-xs font-medium rounded hover">
         承認中
       </div>
     );
   }
   if (status === "approved") {
     return (
-      <div className="inline-block px-4 py-2 bg-blue-500 text-white font-medium rounded hover">
+      <div className="inline-block px-4 py-2 bg-blue-500 text-white text-xs font-medium rounded hover">
         支払い済み
       </div>
     );

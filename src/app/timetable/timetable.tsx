@@ -85,7 +85,7 @@ export default function TimetableComponent() {
     <div>
       <div className="flex flex-col px-4 items-center mt-2">
         <h1 className="text-2xl font-bold mb-6 text-center">タイムテーブル</h1>
-        <table className="w-full border-[1.5px] border-black border-collapse text-sm sm:text-base">
+        <table className="w-full border-[1.5px] border-black border-collapse text-sm sm:text-base mt-2 mb-8">
           <thead>
             <tr className="bg-pink-400">
               <td className="w-[70px] bg-pink-500"></td>

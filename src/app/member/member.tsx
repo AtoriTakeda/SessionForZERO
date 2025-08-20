@@ -26,7 +26,7 @@ export default function MemberComponent() {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-6 text-center">参加者一覧</h1>
-      <div className="flex px-4 justify-center mt-2">
+      <div className="flex px-4 justify-center mt-2 mb-8">
         <table className="w-full border-[1.5px] border-black border-collapse text-sm sm:text-base">
           <thead className="bg-yellow-300">
             <tr>

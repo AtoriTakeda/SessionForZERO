@@ -311,7 +311,7 @@ export const TimetableForm = ({ timetableFramePath }: Prop) => {
         <h1 className="text-2xl font-bold mb-6 text-center">
           タイムテーブル設定
         </h1>
-        <table className="w-full border-[1.5px] border-black border-collapse text-sm sm:text-base">
+        <table className="w-full border-[1.5px] border-black border-collapse text-sm sm:text-base mt-2 mb-8">
           <thead>
             <tr>
               <td></td>
@@ -448,6 +448,9 @@ export const TimetableForm = ({ timetableFramePath }: Prop) => {
               一度登録すると上書き保存されます。よろしいですか？
             </p>
             <DialogFooter className="flex justify-end gap-2 mt-4">
+              <Button variant="outline" onClick={() => setOpen(false)}>
+                キャンセル
+              </Button>
               <Button
                 className="bg-blue-600 text-white px-5"
                 onClick={() => {
@@ -456,9 +459,6 @@ export const TimetableForm = ({ timetableFramePath }: Prop) => {
                 }}
               >
                 登録
-              </Button>
-              <Button variant="outline" onClick={() => setOpen(false)}>
-                キャンセル
               </Button>
             </DialogFooter>
           </DialogContent>

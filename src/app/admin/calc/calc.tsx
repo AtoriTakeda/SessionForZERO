@@ -160,6 +160,9 @@ export default function CalcComponent() {
               間違いがないか今一度確認してから請求を行うようにしてください。
             </p>
             <DialogFooter className="flex justify-end gap-2 mt-4">
+              <Button variant="outline" onClick={() => setOpen(false)}>
+                キャンセル
+              </Button>
               <Button
                 className="bg-blue-600 text-white px-5"
                 onClick={() => {
@@ -168,9 +171,6 @@ export default function CalcComponent() {
                 }}
               >
                 請求
-              </Button>
-              <Button variant="outline" onClick={() => setOpen(false)}>
-                キャンセル
               </Button>
             </DialogFooter>
           </DialogContent>
