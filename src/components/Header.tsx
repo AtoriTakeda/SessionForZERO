@@ -143,20 +143,18 @@ export default function Header({ userId }: { userId: string | undefined }) {
               <div className="text-sm font-semibold">マイページ</div>
               <div className="text-xs text-gray-400 -mt-1">MyPage</div>
             </Link>
+          </div>
+          <div className="flex flex-col mt-auto w-full mb-20">
             {isAdmin && (
               <Link
                 href="/admin"
                 className="text-center hover:text:gray-300"
                 onClick={() => setIsOpen(false)}
               >
-                <div className="text-blue-500 text-sm font-semibold">
-                  管理者ページ
-                </div>
-                <div className="text-xs text-blue-300 -mt-1">Administrator</div>
+                <div className="text-sm font-semibold">管理者ページ</div>
+                <div className="text-xs text-gray-400 -mt-1">Administrator</div>
               </Link>
             )}
-          </div>
-          <div className="flex flex-col mt-auto w-full mb-20">
             <button
               onClick={async () => {
                 await supabaseClient.auth.signOut();

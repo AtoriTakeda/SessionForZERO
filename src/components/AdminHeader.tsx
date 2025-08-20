@@ -60,17 +60,17 @@ export default function AdminHeader() {
               <div className="text-xs text-gray-400 -mt-1">Payment Calc</div>
             </Link>
           </div>
-          <Link
-            href="/"
-            className="text-center hover:text:gray-300"
-            onClick={() => setIsOpen(false)}
-          >
-            <div className="text-sm text-blue-400 font-semibold">
-              ユーザーページに戻る
-            </div>
-            <div className="text-xs text-blue-300 -mt-1">Back to UserPage</div>
-          </Link>
           <div className="flex flex-col mt-auto w-full mb-20">
+            <Link
+              href="/"
+              className="text-center hover:text:gray-300"
+              onClick={() => setIsOpen(false)}
+            >
+              <div className="text-sm font-semibold">ユーザーページに戻る</div>
+              <div className="text-xs text-gray-400 -mt-1">
+                Back to UserPage
+              </div>
+            </Link>
             <button
               onClick={async () => {
                 await supabaseClient.auth.signOut();
