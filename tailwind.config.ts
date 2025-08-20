@@ -52,7 +52,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        logo: ['Zen Kurenaido"', "serif"],
+        logo: ["Zen Kurenaido", "serif"],
         sans: [
           "-apple-system",
           "BlinkMacSystemFont",
