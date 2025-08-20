@@ -15,7 +15,7 @@ type Payment = {
   payment_url: string;
 };
 
-export default function Header({ userId }: { userId: string }) {
+export default function Header({ userId }: { userId: string | undefined }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScheduled, setIsScheduled] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -51,16 +51,18 @@ export default function Header({ userId }: { userId: string }) {
     };
 
     const getPayment = async () => {
-      const { data, error } = await supabaseClient
-        .from("payment")
-        .select("*")
-        .eq("id", userId)
-        .single();
-      if (error) {
-        console.error("支払い情報の取得に失敗しました");
-      }
-      if (data !== null) {
-        setPayment(data);
+      if (userId) {
+        const { data, error } = await supabaseClient
+          .from("payment")
+          .select("*")
+          .eq("id", userId)
+          .single();
+        if (error) {
+          console.error("支払い情報の取得に失敗しました");
+        }
+        if (data !== null) {
+          setPayment(data);
+        }
       }
     };
 
@@ -70,7 +72,7 @@ export default function Header({ userId }: { userId: string }) {
   }, []);
 
   const paySessionFee = async () => {
-    if (payment?.payment_url) {
+    if (userId && payment?.payment_url) {
       window.open(payment.payment_url, "_blank");
       await supabaseClient
         .from("payment")
