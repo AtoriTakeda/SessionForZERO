@@ -5,6 +5,7 @@ import {
 } from "@/lib/supabase/checkUserInfo";
 import Link from "next/link";
 import { isUserEntried } from "@/lib/supabase/isUserEnteried";
+import { isTimetableCreated } from "@/lib/supabase/isTimetableCreated";
 
 export default async function TopPage() {
   const { user } = await checkAuthenticatedUser();
@@ -19,6 +20,8 @@ export default async function TopPage() {
   console.log(`[LOGIN] ${user.email} (${user.id})`);
 
   const alreadyEntried = await isUserEntried(user.id);
+
+  const { isCreated } = await isTimetableCreated();
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 py-12">
@@ -53,6 +56,14 @@ export default async function TopPage() {
             参加者一覧へ
           </button>
         </Link>
+
+        {isCreated && (
+          <Link href="/timetable" className="w-full">
+            <button className="w-full bg-gray-700 text-white px-6 py-3 rounded hover:bg-gray-800">
+              タイムテーブルへ
+            </button>
+          </Link>
+        )}
       </div>
     </main>
   );

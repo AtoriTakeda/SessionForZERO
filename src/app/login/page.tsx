@@ -5,13 +5,13 @@ import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const handleLogin = async () => {
+    const redirectTo =
+      process.env.NEXT_PUBLIC_REDIRECT_URL ??
+      "https://session-for-zero-git-work-atoritakedas-projects.vercel.app/login/callback";
     const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo:
-          // 本番用では本番用のURLに変更する。その際本番用のSupabaseのプロジェクトでもSite URLとRedirect URLsを設定しておく
-          "https://session-for-zero-git-work-atoritakedas-projects.vercel.app/login/callback",
-        //"http://localhost:3000/login/callback",
+        redirectTo: redirectTo,
       },
     });
 
