@@ -311,7 +311,7 @@ export const TimetableForm = ({ timetableFramePath }: Prop) => {
         <h1 className="text-2xl font-bold mb-6 text-center">
           タイムテーブル設定
         </h1>
-        <table className="w-full border-[1.5px] border-black border-collapse text-sm sm:text-base mt-2 mb-8">
+        <table className="w-full border-[1.5px] border-black border-collapse text-sm sm:text-base mt-2 mb-2">
           <thead>
             <tr>
               <td></td>
@@ -430,7 +430,7 @@ export const TimetableForm = ({ timetableFramePath }: Prop) => {
           タイムスケジュール作成
         </button>
       </div>
-      <div className="flex justify-between items-center ml-2">
+      <div className="flex justify-between items-center ml-2 mb-8">
         <button
           onClick={() => router.push(timetableFramePath)}
           className="rounded bg-gray-200 px-4 shadow-md"

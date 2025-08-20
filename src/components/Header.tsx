@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Menu } from "lucide-react";
-import { AvatarMenu } from "@/components/AvatarMenu";
 import { supabaseClient } from "@/lib/supabase/browser";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,7 @@ export default function Header({ userId }: { userId: string | undefined }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [payment, setPayment] = useState<Payment | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const checkTimetable = async () => {
@@ -134,6 +135,14 @@ export default function Header({ userId }: { userId: string | undefined }) {
                 <div className="text-xs text-gray-400 -mt-1">Timetable</div>
               </Link>
             )}
+            <Link
+              href="/myPage"
+              className="text-center hover:text-gray-300"
+              onClick={() => setIsOpen(false)}
+            >
+              <div className="text-sm font-semibold">マイページ</div>
+              <div className="text-xs text-gray-400 -mt-1">MyPage</div>
+            </Link>
             {isAdmin && (
               <Link
                 href="/admin"
@@ -147,6 +156,22 @@ export default function Header({ userId }: { userId: string | undefined }) {
               </Link>
             )}
           </div>
+          <div className="flex flex-col mt-auto w-full mb-20">
+            <button
+              onClick={async () => {
+                await supabaseClient.auth.signOut();
+                router.push("/login");
+                setIsOpen(false);
+              }}
+              className="flex items-center justify-start w-full px-4 py-2"
+            >
+              <div className="text-center hover:text:gray-300">
+                <div className="text-sm font-semibold">ログアウト</div>
+                <p></p>
+                <div className="text-xs text-gray-300 -mt-1">LogOut</div>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -157,8 +182,6 @@ export default function Header({ userId }: { userId: string | undefined }) {
             onPayClick={() => setDialogOpen(true)}
           />
         )}
-        {/* 右側：ログインユーザーのアイコン */}
-        <AvatarMenu />
       </div>
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
