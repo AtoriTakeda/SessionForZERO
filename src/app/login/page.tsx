@@ -5,13 +5,11 @@ import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const handleLogin = async () => {
-    const redirectTo =
-      process.env.NEXT_PUBLIC_REDIRECT_URL ??
-      "https://session-for-zero-git-work-atoritakedas-projects.vercel.app/login/callback";
     const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: redirectTo,
+        redirectTo:
+          "https://session-for-zero-git-work-atoritakedas-projects.vercel.app/login/callback",
       },
     });
 
