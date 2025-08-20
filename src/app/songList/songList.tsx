@@ -165,7 +165,7 @@ function SongListComponent({ user, onRefresh }: Props) {
         <div className="text-center py-4 text-gray-600">反映中です...</div>
       )}
       <h1 className="text-2xl font-bold mb-6 text-center">エントリーシート</h1>
-      <div className="flex flex-col px-4 items-center mt-2">
+      <div className="flex flex-col px-4 items-center mt-2 mb-8">
         <table className="w-full border-collapse text-sm sm:text-base">
           <thead className="bg-lime-300">
             <tr>

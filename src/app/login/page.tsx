@@ -5,14 +5,14 @@ import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const handleLogin = async () => {
+    const redirectTo =
+      process.env.EXT_PUBLIC_REDIRECT_URL ??
+      "https://sessionforzero.com/login/callback";
+    //"https://session-for-zero-git-main-atoritakedas-projects.vercel.app/login/callback"
     const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo:
-          // 本番用
-          "https://sessionforzero.com/login/callback",
-        //"https://session-for-zero-git-main-atoritakedas-projects.vercel.app/login/callback",
-        //"http://localhost:3000/login/callback",
+        redirectTo: redirectTo,
       },
     });
 

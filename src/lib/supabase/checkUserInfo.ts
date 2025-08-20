@@ -31,3 +31,24 @@ export const checkUserRegistered = async (userId: string) => {
 
   return { isRegistered: !!data, error: null };
 };
+
+export const checkAdminUser = async (userId: string) => {
+  const supabase = createClientServerComponent();
+
+  const { data, error } = await supabase
+    .from("profile")
+    .select("role")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    console.error("役割チェック失敗:", error.message);
+    return { isAdmin: false, error };
+  }
+
+  if (data.role == "admin") {
+    return { isAdmin: true, error: null };
+  } else {
+    return { isAdmin: false, error: null };
+  }
+};

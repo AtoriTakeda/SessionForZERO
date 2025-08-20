@@ -42,3 +42,21 @@ export type GroupedPerformer = {
 export type RPC =
   | "insert_entrysheet_with_member"
   | "update_entrysheet_with_member";
+
+export type TimetableRow = {
+  holding_time_id: string;
+  start_time: string;
+  end_time: string;
+  columns: Record<string, SongList | null>;
+};
+
+export type Studio = {
+  id: string;
+  name: string;
+};
+
+export type SongList = {
+  id: string;
+  artist: string;
+  title: string;
+};
